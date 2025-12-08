@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thư Mời Lễ Tốt Nghiệp</title>
+
+    <style>
+      .box {
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+      }
+
+      canvas {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+      #pinkboard {
+        position: relative;
+        margin: auto;
+        height: 500px;
+        width: 500px;
+        animation: animate 1.3s infinite;
+      }
+
+      #pinkboard:before,
+      #pinkboard:after {
+        content: "";
+        position: absolute;
+        background: #c793aa;
+        width: 100px;
+        height: 160px;
+        border-top-left-radius: 100px;
+        border-top-right-radius: 100px;
+      }
+
+      #pinkboard:before {
+        left: 100px;
+        transform: rotate(-45deg);
+        transform-origin: 0 100%;
+        box-shadow: 0 14px 28px rgba(234, 22, 22, 0.25),
+          0 10px 10px rgba(0, 0, 0, 0.22);
+      }
+
+      #pinkboard:after {
+        left: 0;
+        transform: rotate(45deg);
+        transform-origin: 1000% 1000%;
+      }
+
+      @keyframes animate {
+        0% {
+          transform: scale(1);
+        }
+        30% {
+          transform: scale(0.8);
+        }
+        60% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background: #fffdfd;
+        margin: 0;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .container {
+        background: rgb(230, 207, 229);
+        padding: 136px;
+        border-radius: 50px;
+        max-width: 800px;
+        margin: auto;
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Slideshow */
+      .slideshow {
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        border-radius: 20px;
+        margin-bottom: 20px;
+      }
+
+      .slideshow img {
+        width: 25%;
+        border-radius: 10px;
+      }
+
+      /* Messenger button */
+      .button {
+        background: #0084ff;
+        color: rgb(255, 255, 255);
+        padding: 12px 20px;
+        text-decoration: none;
+        border-radius: 10px;
+        display: inline-block;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎓 Thư Mời Lễ Tốt Nghiệp</h1>
+      <div
+        id="nameScreen"
+        style="
+          position: fixed;
+          inset: 0;
+          background: white;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          z-index: 9999;
+        "
+      >
+        <input
+          id="nameInput"
+          type="text"
+          placeholder="Nhập tên của bạn..."
+          style="
+            width: 80%;
+            max-width: 500px;
+            padding: 20px;
+            font-size: 24px;
+            border: 2px solid #f60ce2;
+            border-radius: 10px;
+          "
+        />
+
+        <button
+          onclick="submitName()"
+          style="
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 20px;
+            cursor: pointer;
+          "
+        >
+          Xác nhận
+        </button>
+      </div>
+
+      <!-- Kết quả hiển thị sau khi nhập -->
+      <h2 id="result"></h2>
+
+      <script>
+        function submitName() {
+          const name = document.getElementById("nameInput").value.trim();
+          if (name !== "") {
+            document.getElementById("result").innerText =
+              "Mời bạn " + name + " đến dự lễ tốt nghiệp của mình !";
+            document.getElementById("nameScreen").style.display = "none"; // Ẩn toàn màn hình nhập
+          }
+        }
+
+        // Cho phép nhấn Enter để xác nhận
+        document
+          .getElementById("nameInput")
+          .addEventListener("keydown", function (e) {
+            if (e.key === "Enter") submitName();
+          });
+      </script>
+      <!-- Slideshow ảnh -->
+      <div class="slideshow"><img id="slide-img" src="" /></div>
+
+      <h3>📅 Thời gian:</h3>
+      <p style="font-family: Verdana, Geneva, Tahoma, sans-serif">
+        9:30-10:30 AM – Ngày 18/01/2026
+      </p>
+
+      <h3>📍 Địa điểm:</h3>
+      <p style="font-family: Verdana, Geneva, Tahoma, sans-serif">
+        Sân Trường - Trường THPT Lý Nhân Tông
+      </p>
+      <hr />
+      <p style="font-family: Verdana, Geneva, Tahoma, sans-serif">
+        Nếu cần liên hệ, nhấn vào Messenger bên dưới:
+      </p>
+
+      <!-- Nút Messenger -->
+      <a class="button" href="https://m.me/.qphong.567968" target="_blank">
+        Nhắn cho mình qua Messenger
+      </a>
+    </div>
+
+    <script>
+      /* Danh sách ảnh chuyển động */
+      const images = [
+        " img/z7299386064916_0229c943b093fd097ce36b4cddf940aa.",
+        " img/z7299226241414_d0721398e8bb5e19f39274342b408acb.",
+      ];
+
+      let index = 0;
+
+      /* Hàm đổi ảnh */
+      function changeSlide() {
+        document.getElementById("slide-img").src = images[index];
+        index = (index + 1) % images.length;
+      }
+
+      /* Chạy ảnh lần đầu */
+      changeSlide();
+
+      /* Chuyển ảnh mỗi 2.5 giây */
+      setInterval(changeSlide, 2500);
+    </script>
+  </body>
+</html>
